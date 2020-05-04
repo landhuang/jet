@@ -12,5 +12,5 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 /.idea/
 /api/.idea/
-/api/jeten.iml
+/api/*.iml
 /view-pc/.history/src/

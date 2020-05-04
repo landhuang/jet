@@ -9,6 +9,7 @@ import com.land.jeten.login.request.RequestLogin;
 import com.land.jeten.login.service.LoginService;
 import com.land.jeten.login.vo.LoginVo;
 import com.land.jeten.login.vo.UserVo;
+import com.land.jeten.util.JetenUtil;
 import com.land.jeten.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +21,11 @@ public class LoginController implements LoginApi {
   @Autowired
   LoginService loginService;
 
-  public ResponseVo<UserVo> login(@RequestBody RequestLogin login) {
-    UserVo userVo = new UserVo();
-    Login convert = Convert.convert(Login.class, login);
-    loginService.checkLogin(convert);
+  public ResponseVo<UserVo> login(@RequestBody RequestLogin requestLogin) {
+    Login login = JetenUtil.convert(Login.class, requestLogin);
+    login = loginService.checkLogin(login);
+    UserVo userVo = JetenUtil.convert(UserVo.class, login);
+    userVo.setPassword(null);
     return ResponseVo.success(userVo);
   }
   public ResponseVo<UserInfo> logout(@RequestBody RequestLogin login) {

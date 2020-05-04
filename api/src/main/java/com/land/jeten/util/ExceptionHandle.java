@@ -34,10 +34,10 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
    * @param e
    * @return
    */
-  @ExceptionHandler(value = MyException.class)
+  @ExceptionHandler(value = JetenException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  private ResponseVo myExceptionHandler(HttpServletRequest request, MyException e) {
+  private ResponseVo myExceptionHandler(HttpServletRequest request, JetenException e) {
     logger.error(e.getMessage(), e);
     System.out.println("自定义异常 ："+ e.getMsg());
     return  ResponseVo.error(e.getMsg()+"url:"+request.getRequestURI());
