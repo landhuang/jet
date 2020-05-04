@@ -1,0 +1,9 @@
+
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/jetdb?serverTimezone=UTC
+    username: root
+    password: Q1w2e3r$
