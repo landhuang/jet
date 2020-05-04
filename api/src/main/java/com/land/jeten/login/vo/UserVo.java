@@ -5,4 +5,6 @@ import lombok.Data;
 
 @Data
 public class UserVo extends UserInfo {
+
+  private String token;
 }

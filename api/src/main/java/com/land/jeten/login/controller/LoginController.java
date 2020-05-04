@@ -26,6 +26,7 @@ public class LoginController implements LoginApi {
     login = loginService.checkLogin(login);
     UserVo userVo = JetenUtil.convert(UserVo.class, login);
     userVo.setPassword(null);
+    userVo.setToken(JetenUtil.getToken());
     return ResponseVo.success(userVo);
   }
   public ResponseVo<UserInfo> logout(@RequestBody RequestLogin login) {
