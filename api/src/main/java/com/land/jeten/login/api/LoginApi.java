@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface LoginApi {
 
   @PostMapping("login")
-  public ResponseVo<UserVo> login(@RequestBody RequestLogin login);
+  ResponseVo<UserVo> login(@RequestBody RequestLogin login);
 
   @PostMapping("logout")
-  public ResponseVo<UserInfo> logout(@RequestBody RequestLogin login);
+  ResponseVo<UserInfo> logout(@RequestBody RequestLogin login);
 
   @PostMapping("forge-password")
-  public ResponseVo<LoginVo> forgePassword(RequestLogin login);
+  ResponseVo<LoginVo> forgePassword(RequestLogin login);
 
   @PostMapping("register")
-  public ResponseVo<LoginVo> register(RequestLogin login);
+  ResponseVo<LoginVo> register(RequestLogin login);
 
   @PostMapping("2step-code")
-  public ResponseVo<LoginVo> towStepCode(RequestLogin login);
+  ResponseVo<LoginVo> towStepCode(RequestLogin login);
 }
