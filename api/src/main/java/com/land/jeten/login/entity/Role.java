@@ -16,5 +16,6 @@ public class Role {
   private String createTime;
   private String merchantCode;
   private String deleted;
+  private List<String> permissionList;
   private List<Permission> permissions;
 }

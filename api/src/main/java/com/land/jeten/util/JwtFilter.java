@@ -24,9 +24,9 @@ public class JwtFilter implements Filter {
     HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
     HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
     String url = httpRequest.getServletPath();
-    String token = httpRequest.getHeader("token");
+    String token = httpRequest.getHeader("Access-Token");
     if (StrUtil.isBlank(token)) {
-      if (url.equals("/auth/login")) {
+      if (url.equals("/auth/login") || url.equals("/auth/2step-code") ) {
         filterChain.doFilter(servletRequest, servletResponse);
       } else {
         log.error("请先登陆！ url:{}]" , url);
@@ -35,7 +35,7 @@ public class JwtFilter implements Filter {
     } else {
       token = JetenUtil.jwtRefresh(token);
       httpResponse.addHeader("isReFresh", "yes");
-      httpResponse.setHeader("token", token);
+      httpResponse.setHeader("Access-Token", token);
     }
     filterChain.doFilter(servletRequest, servletResponse);
   }

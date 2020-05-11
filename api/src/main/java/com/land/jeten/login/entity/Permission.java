@@ -10,6 +10,7 @@ public class Permission {
   private String roleId;
   private String permissionId;
   private String permissionName;
+  private List<String> actionList;
   private List<Action> actions;
   private List<ActionEntitySet> actionEntitySets;
 

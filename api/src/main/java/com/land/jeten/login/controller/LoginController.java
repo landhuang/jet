@@ -45,6 +45,7 @@ public class LoginController implements LoginApi {
   }
   public ResponseVo<LoginVo> towStepCode(RequestLogin login) {
     LoginVo loginVo = new LoginVo();
+    loginVo.setStepCode(true);
     return ResponseVo.success(loginVo);
   }
 }

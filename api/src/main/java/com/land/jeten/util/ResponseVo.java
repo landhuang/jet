@@ -7,7 +7,7 @@ public class ResponseVo<T> implements Serializable {
 
   private String code;
   private String msg;
-  private T data;
+  private T result;
 
   private ResponseVo() {
   }
@@ -17,44 +17,44 @@ public class ResponseVo<T> implements Serializable {
     this.msg = type.getMsg();
   }
 
-  public ResponseVo(ResponseCodeEnum type, T data) {
-    this.data = data;
+  public ResponseVo(ResponseCodeEnum type, T result) {
+    this.result = result;
     this.code = type.getCode();
     this.msg = type.getMsg();
   }
 
-  public ResponseVo(ResponseCodeEnum type, String content, T data) {
+  public ResponseVo(ResponseCodeEnum type, String content, T result) {
     this.code = type.getCode();
     this.msg = content;
-    this.data = data;
+    this.result = result;
   }
 
-  public static ResponseVo success() {
-    return new ResponseVo(ResponseCodeEnum.SERVICE_SUCCESS);
+  public static ResponseVo<?> success() {
+    return new ResponseVo<>(ResponseCodeEnum.SERVICE_SUCCESS);
   }
 
-  public static <T> ResponseVo<T> success(T data) {
-    return new ResponseVo(ResponseCodeEnum.SERVICE_SUCCESS, data);
+  public static <T> ResponseVo<T> success(T result) {
+    return new ResponseVo<>(ResponseCodeEnum.SERVICE_SUCCESS, result);
   }
 
-  public static <T> ResponseVo<T> error(T data) {
-    return new ResponseVo(ResponseCodeEnum.SERVICE_ERROR, data);
+  public static <T> ResponseVo<T> error(T result) {
+    return new ResponseVo<>(ResponseCodeEnum.SERVICE_ERROR, result);
   }
 
-  public static  <T> ResponseVo<T> success(String content, T data) {
-    return new ResponseVo(ResponseCodeEnum.SERVICE_SUCCESS, content, data);
+  public static  <T> ResponseVo<T> success(String content, T result) {
+    return new ResponseVo<>(ResponseCodeEnum.SERVICE_SUCCESS, content, result);
   }
 
-  public static ResponseVo error() {
-    return new ResponseVo(ResponseCodeEnum.SERVICE_ERROR);
+  public static ResponseVo<?> error() {
+    return new ResponseVo<>(ResponseCodeEnum.SERVICE_ERROR);
   }
 
-  public static ResponseVo error(ResponseCodeEnum typeEnum) {
-    return new ResponseVo(typeEnum);
+  public static ResponseVo<?> error(ResponseCodeEnum typeEnum) {
+    return new ResponseVo<>(typeEnum);
   }
 
-  public static ResponseVo error(ResponseCodeEnum typeEnum, String msg) {
-    return new ResponseVo(typeEnum,msg);
+  public static ResponseVo<?> error(ResponseCodeEnum typeEnum, String msg) {
+    return new ResponseVo<>(typeEnum,msg);
   }
 
   public String getMsg() {
@@ -73,12 +73,12 @@ public class ResponseVo<T> implements Serializable {
     this.code = code;
   }
 
-  public T getData() {
-    return data;
+  public T getResult() {
+    return result;
   }
 
-  public void setData(T data) {
-    this.data = data;
+  public void setResult(T result) {
+    this.result = result;
   }
 
 }

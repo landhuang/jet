@@ -3,11 +3,11 @@ package com.land.jeten.login.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ActionEntitySet {
 
   private String id;
-  private String action;
-  private String describe;
-  private String defaultCheck;
+  private List<Action> action;
 }

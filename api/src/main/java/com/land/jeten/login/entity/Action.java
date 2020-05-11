@@ -8,6 +8,6 @@ public class Action {
 
   private String id;
   private String action;
-  private String defaultCheck;
+  private boolean defaultCheck;
   private String describe;
 }

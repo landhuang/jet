@@ -111,9 +111,9 @@ public class JetenUtil {
 
   public static String jwtRefresh(String token) throws ServletException {
     try {
-      Algorithm algorithm = Algorithm.HMAC256("secret");
+      Algorithm algorithm = Algorithm.HMAC256(secret);
       JWTVerifier verifier = JWT.require(algorithm)
-              .withIssuer("SERVICE")
+              .withIssuer(ISSUER)
               .build(); //Reusable verifier instance
       DecodedJWT jwt = verifier.verify(token);
       long time = jwt.getExpiresAt().getTime();
