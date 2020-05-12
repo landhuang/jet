@@ -63,35 +63,112 @@ public class UserController {
   }
 
   public Permission setPermissions(String role){
-
     Permission permission = new Permission();
-    permission.setPermissionId("dashboard");
-    permission.setPermissionName("仪表盘");
-    permission.setRoleId("admin");
+    switch (role) {
+      case "dashboard":
+        permission.setPermissionId("dashboard");
+        permission.setPermissionName("仪表盘");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "exception":
+        permission.setPermissionId("exception");
+        permission.setPermissionName("异常页面权限");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "result":
+        permission.setPermissionId("result");
+        permission.setPermissionName("结果权限");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "profile":
+        permission.setPermissionId("profile");
+        permission.setPermissionName("详细页权限");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "table":
+        permission.setPermissionId("table");
+        permission.setPermissionName("表格权限");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "form":
+        permission.setPermissionId("form");
+        permission.setPermissionName("表单权限");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "order":
+        permission.setPermissionId("order");
+        permission.setPermissionName("订单管理");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "permission":
+        permission.setPermissionId("permission");
+        permission.setPermissionName("权限管理");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "role":
+        permission.setPermissionId("role");
+        permission.setPermissionName("角色管理");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+//      case "table":
+//        permission.setPermissionId("table");
+//        permission.setPermissionName("桌子管理");
+//        permission.setRoleId("admin");
+//        setActionList(permission);
+//        setActionEntitySet(permission);
+//        setActions(permission);
+//        break;
+      case "user":
+        permission.setPermissionId("user");
+        permission.setPermissionName("用户管理");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
+      case "support":
+        permission.setPermissionId("support");
+        permission.setPermissionName("超级模块");
+        permission.setRoleId("admin");
+        setActionList(permission);
+        setActionEntitySet(permission);
+        setActions(permission);
+        break;
 
-    setActionList(permission);
-    setActionEntitySet(permission);
-    setActions(permission);
+    }
+
+
 
     return permission;
   }
 
-  public void setPermissions(Role role){
-
-    Permission permission = new Permission();
-    permission.setPermissionId("dashboard");
-    permission.setPermissionName("仪表盘");
-    permission.setRoleId("admin");
-
-    setActionList(permission);
-    setActionEntitySet(permission);
-    setActions(permission);
-
-    List<Permission> listPer = new ArrayList<>();
-    listPer.add(permission);
-
-    role.setPermissions(listPer);
-  }
 
   public void setActions(Permission permission) {
     permission.setActions(getListAction(permission.getActionList()));
