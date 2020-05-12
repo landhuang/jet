@@ -7,6 +7,7 @@ import com.land.jeten.login.entity.Permission;
 import com.land.jeten.login.entity.Role;
 import com.land.jeten.login.vo.UserVo;
 import com.land.jeten.util.JetenApiConstant;
+import com.land.jeten.util.JetenUtil;
 import com.land.jeten.util.ResponseVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,17 @@ public class UserController {
     UserVo userVo = new UserVo();
     Role role = new Role();
     setPermissionList(role);
-    setPermissions(role);
-
-
+    List<String> permissionList = role.getPermissionList();
+    for (String s : permissionList) {
+      Permission permission = setPermissions(s);
+      List<Permission> permissions = role.getPermissions();
+      if(JetenUtil.ObjIsBlank(permissions)){
+        permissions = new ArrayList<>();
+      }
+      permissions.add(permission);
+      role.setPermissions(permissions);
+    }
+//    setPermissions(role);
     userVo.setRole(role);
     return ResponseVo.success(userVo);
   }
@@ -53,17 +62,30 @@ public class UserController {
     role.setPermissionList(permissionList);
   }
 
+  public Permission setPermissions(String role){
+
+    Permission permission = new Permission();
+    permission.setPermissionId("dashboard");
+    permission.setPermissionName("仪表盘");
+    permission.setRoleId("admin");
+
+    setActionList(permission);
+    setActionEntitySet(permission);
+    setActions(permission);
+
+    return permission;
+  }
 
   public void setPermissions(Role role){
 
     Permission permission = new Permission();
-    setActionEntitySet(permission);
-    setActionList(permission);
-    setActions(permission);
-
     permission.setPermissionId("dashboard");
     permission.setPermissionName("仪表盘");
     permission.setRoleId("admin");
+
+    setActionList(permission);
+    setActionEntitySet(permission);
+    setActions(permission);
 
     List<Permission> listPer = new ArrayList<>();
     listPer.add(permission);
@@ -72,97 +94,65 @@ public class UserController {
   }
 
   public void setActions(Permission permission) {
-    List<Action> action = new ArrayList<>();
-
-    List<Action> actions = new ArrayList<>();
-
-    Action actionAdd = new Action();
-    actionAdd.setAction("add");
-    actionAdd.setDefaultCheck(false);
-    actionAdd.setDescribe("新增");
-    actions.add(actionAdd);
-
-    Action actionQuery = new Action();
-    actionQuery.setAction("query");
-    actionQuery.setDefaultCheck(false);
-    actionQuery.setDescribe("查询");
-    actions.add(actionQuery);
-
-    Action actionGet = new Action();
-    actionGet.setAction("get");
-    actionGet.setDefaultCheck(false);
-    actionGet.setDescribe("详情");
-    actions.add(actionGet);
-
-    Action actionUpdate = new Action();
-    actionUpdate.setAction("update");
-    actionUpdate.setDefaultCheck(false);
-    actionUpdate.setDescribe("修改");
-    actions.add(actionUpdate);
-
-    Action actionDelete = new Action();
-    actionDelete.setAction("delete");
-    actionDelete.setDefaultCheck(false);
-    actionDelete.setDescribe("删除");
-    actions.add(actionDelete);
-
-    permission.setActions(actions);
+    permission.setActions(getListAction(permission.getActionList()));
   }
 
   public void setActionList(Permission permission) {
-    List<String> action = new ArrayList<>();
-    action.add("add");
-    action.add("query");
-    action.add("get");
-    action.add("update");
-    action.add("delete");
+    List<String> actions = new ArrayList<>();
+    actions.add("add");
+    actions.add("query");
+    actions.add("get");
+    actions.add("update");
+    actions.add("delete");
 
-    permission.setActionList(action);
+    permission.setActionList(actions);
   }
 
   public void setActionEntitySet(Permission permission){
     List<ActionEntitySet> actionEntitySets = new ArrayList<>();
     ActionEntitySet actionEntitySet = new ActionEntitySet();
-    setAction(actionEntitySet);
-
+    actionEntitySet.setAction(getListAction(permission.getActionList()));
     actionEntitySets.add(actionEntitySet);
     permission.setActionEntitySets(actionEntitySets);
   }
 
-  public void setAction(ActionEntitySet actionEntitySet) {
+  public List<Action> getListAction(List<String> actions) {
+    List<Action> actionList = new ArrayList<>();
+    actions.forEach(a -> {
+      Action action = new Action();
 
-    List<Action> actions = new ArrayList<>();
+      switch (a) {
+        case "add":
+          action.setAction("add");
+          action.setDefaultCheck(false);
+          action.setDescribe("新增");
+          break;
+        case "query":
+          action.setAction("query");
+          action.setDefaultCheck(false);
+          action.setDescribe("查询");
+          break;
+        case "get":
+          action.setAction("get");
+          action.setDefaultCheck(false);
+          action.setDescribe("详情");
+          break;
+        case "update":
+          action.setAction("update");
+          action.setDefaultCheck(false);
+          action.setDescribe("修改");
+          break;
+        case "delete":
+          action.setAction("delete");
+          action.setDefaultCheck(false);
+          action.setDescribe("删除");
+          break;
+      }
+      if (JetenUtil.isNotBlank(action.getAction())) {
+        actionList.add(action);
+      }
+    });
 
-    Action actionAdd = new Action();
-    actionAdd.setAction("add");
-    actionAdd.setDefaultCheck(false);
-    actionAdd.setDescribe("新增");
-    actions.add(actionAdd);
-
-    Action actionQuery = new Action();
-    actionQuery.setAction("query");
-    actionQuery.setDefaultCheck(false);
-    actionQuery.setDescribe("查询");
-    actions.add(actionQuery);
-
-    Action actionGet = new Action();
-    actionGet.setAction("get");
-    actionGet.setDefaultCheck(false);
-    actionGet.setDescribe("详情");
-    actions.add(actionGet);
-
-    Action actionUpdate = new Action();
-    actionUpdate.setAction("update");
-    actionUpdate.setDefaultCheck(false);
-    actionUpdate.setDescribe("修改");
-    actions.add(actionUpdate);
-
-    Action actionDelete = new Action();
-    actionDelete.setAction("delete");
-    actionDelete.setDefaultCheck(false);
-    actionDelete.setDescribe("删除");
-    actions.add(actionDelete);
-
-    actionEntitySet.setAction(actions);
+    return actionList;
   }
 }

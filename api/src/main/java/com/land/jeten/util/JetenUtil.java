@@ -6,6 +6,8 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -172,6 +174,17 @@ public class JetenUtil {
 //    String s = SecureUtil.md5(str);
 //    return s;
 //  }
+
+  public static boolean isBlank(String str) {
+    return StrUtil.isBlank(str);
+  }
+  public static boolean isNotBlank(String str) {
+    return StrUtil.isNotBlank(str);
+  }
+
+  public static boolean ObjIsBlank(Object object) {
+    return ObjectUtil.isEmpty(object);
+  }
 
   public static void main(String[] args) {
 
