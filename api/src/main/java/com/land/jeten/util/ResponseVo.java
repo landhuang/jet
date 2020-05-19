@@ -7,6 +7,8 @@ public class ResponseVo<T> implements Serializable {
 
   private String code;
   private String msg;
+  private String message;
+  private Long timestamp = 1L;
   private T result;
 
   private ResponseVo() {
@@ -81,4 +83,11 @@ public class ResponseVo<T> implements Serializable {
     this.result = result;
   }
 
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

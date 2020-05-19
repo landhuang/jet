@@ -210,6 +210,7 @@ export default {
     getProjects () {
       this.$http.get('/list/search/projects')
         .then(res => {
+          console.log('getProjects res', res)
           this.projects = res.result && res.result.data
           this.loading = false
         })
@@ -217,12 +218,14 @@ export default {
     getActivity () {
       this.$http.get('/workplace/activity')
         .then(res => {
+          console.log('getActivity res', res)
           this.activities = res.result
         })
     },
     getTeams () {
       this.$http.get('/workplace/teams')
         .then(res => {
+          console.log('getTeams res', res)
           this.teams = res.result
         })
     },
@@ -231,6 +234,7 @@ export default {
 
       this.$http.get('/workplace/radar')
         .then(res => {
+          console.log('initRadar res', res)
           const dv = new DataSet.View().source(res.result)
           dv.transform({
             type: 'fold',

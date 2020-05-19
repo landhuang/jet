@@ -23,6 +23,8 @@ public class UserController {
   @GetMapping("info")
   public ResponseVo<UserVo> getUserInfo(){
     UserVo userVo = new UserVo();
+    userVo.setAvatar("/avatar2.jpg");
+    userVo.setName("阿炼");
     Role role = new Role();
     setPermissionList(role);
     List<String> permissionList = role.getPermissionList();
