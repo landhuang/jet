@@ -90,4 +90,12 @@ public class ResponseVo<T> implements Serializable {
   public void setMessage(String message) {
     this.message = message;
   }
+
+  public Long getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(Long timestamp) {
+    this.timestamp = timestamp;
+  }
 }
