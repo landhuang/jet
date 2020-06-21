@@ -21,8 +21,8 @@ public class LoginService {
 
   public Login checkLogin(Login login) {
     LambdaQueryWrapper<Login> queryWrapper = new LambdaQueryWrapper<>();
-    queryWrapper.eq(StrUtil.isBlank(login.getUsername()),Login::getUsername, login.getUsername());
-    queryWrapper.eq(StrUtil.isBlank(login.getPassword()),Login::getPassword, login.getPassword());
+    queryWrapper.eq(StrUtil.isNotBlank(login.getUsername()),Login::getUsername, login.getUsername());
+    queryWrapper.eq(StrUtil.isNotBlank(login.getPassword()),Login::getPassword, login.getPassword());
     login = loginMapper.selectOne(queryWrapper);
     if (login == null) {
       throw new JetenException("用户名或是密码不正确");
